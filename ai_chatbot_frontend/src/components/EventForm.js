@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+const BASE_URL = process.env.REACT_APP_API_URL;
 const EventForm = () => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [preview, setPreview] = useState(null);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const eventData = { title, date_range: date, description };
 
     try {
-      await axios.post("http://127.0.0.1:8000/add-event/", eventData);
+       await axios.post(`${BASE_URL}/add-event/`, eventData);
       setPreview(eventData);
       alert("Event added successfully!");
     } catch (error) {
