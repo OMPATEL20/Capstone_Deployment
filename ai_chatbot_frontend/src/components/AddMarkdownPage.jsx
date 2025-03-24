@@ -3,12 +3,12 @@ import SimpleMDE from "react-simplemde-editor";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "easymde/dist/easymde.min.css";
-
+  const BASE_URL = process.env.REACT_APP_API_URL;
 const AddMarkdownPage = () => {
   const [title, setTitle] = useState("");
   const [markdown_content, setMarkdownContent] = useState("");
   const navigate = useNavigate();
-  const BASE_URL = process.env.REACT_APP_API_URL;
+
   const submitContent = async () => {
     await axios.post(`${process.env.REACT_APP_API_URL}/api/admin/add-markdown-content`, {
 
