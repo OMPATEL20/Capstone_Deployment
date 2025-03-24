@@ -170,7 +170,7 @@ const handleSend = async (e) => {
         return;
       }
 
-      const res = await axios.post(`${BASE_URL}/api/chat/", {
+      const res = await axios.post(`${BASE_URL}/api/chat', {
           query: input.trim(),
           session_id: storedSession,
           // session_id: sessionStorage.getItem("chatSessionId"),
