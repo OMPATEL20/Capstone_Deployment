@@ -1,340 +1,3 @@
-// import React, { useState, useEffect, useRef } from "react";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-
-// const ChatbotPage = () => {
-//   const [messages, setMessages] = useState([]);
-//   const [input, setInput] = useState("");
-//   const [sessionId, setSessionId] = useState("");
-//   const [chatHistory, setChatHistory] = useState([]);
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState("");
-//   const [selectedChat, setSelectedChat] = useState(null);
-//   const navigate = useNavigate();
-//   const chatEndRef = useRef(null); // Ref for scrolling to the latest message
-
-//   // ✅ Initialize session on first load
-//   // useEffect(() => {
-//   //   const storedSession = sessionStorage.getItem("chatSessionId");
-//   //   if (storedSession) {
-//   //     setSessionId(storedSession);
-//   //     fetchChatHistory(storedSession);
-//   //   } else {
-//   //     startNewSession();
-//   //   }
-//   // }, []);
-
-//   useEffect(() => {
-//     const storedSession = sessionStorage.getItem("chatSessionId");
-//     if (storedSession) {
-//       fetchChatHistory(storedSession);
-//     } else {
-//       axios
-//         .post("http://localhost:8000/api/login", { email: "user@example.com", password: "yourpassword" })
-//         .then((res) => {
-//           const newSession = res.data.session_id;
-//           sessionStorage.setItem("chatSessionId", newSession);
-//           setSessionId(newSession);
-//           fetchChatHistory(newSession);
-//         })
-//         .catch((err) => console.error("Login error:", err));
-//     }
-//   }, []);
-
-//   // ✅ Function to Start a New Chat Session
-//   // const startNewSession = () => {
-//   //   const newSession = Math.random().toString(36).substring(7);
-//   //   sessionStorage.setItem("chatSessionId", newSession);
-//   //   setSessionId(newSession);
-//   //   setMessages([]);
-//   //   setChatHistory([]);
-//   // };
-
-//   // ✅ Fetch Chat History from ChromaDB-backed API
-//   // const fetchChatHistory = async (session) => {
-//     // try {
-//       // const res = await axios.get(`http://localhost:8000/api/chat/history/?session_id=${session}`);
-//       // if (res.data.history) {
-//         // setMessages(res.data.history);
-//         // setChatHistory(res.data.history.map((msg, i) => ({ id: i, text: msg.text })));
-//       // }
-//     // } catch (error) {
-//       // console.error("Error fetching chat history:", error);
-//     // }
-//   // };
-
-//   const fetchChatHistory = async (session) => {
-//     try {
-//         const res = await axios.get(`http://localhost:8000/api/chat/history`, {
-//             params: { session_id: session },  // ✅ Properly pass session_id
-//         });
-
-//         if (res.data.history) {
-//             // ✅ Store entire chat session in one entry
-//             setChatHistory([{ session_id: session, messages: res.data.history }]);
-//         }
-//     } catch (error) {
-//         console.error("Error fetching chat history:", error.response ? error.response.data : error);
-//     }
-// };
-
-// const handleSend = async (e) => {
-//   e.preventDefault();
-//   if (!input.trim()) return;
-
-//   const userMessage = { sender: "user", text: input.trim() };
-//   const updatedMessages = [...messages, userMessage];
-
-//   setMessages(updatedMessages);
-//   setInput("");
-//   setLoading(true);
-
-//   try {
-//       const storedSession = sessionStorage.getItem("chatSessionId");
-//       console.log("Stored Session:", storedSession);
-//       const res = await axios.post("http://localhost:8000/api/chat/", {
-//           query: input.trim(),
-//           session_id: storedSession,
-//       });
-
-//       console.log("Response:", res.data);
-
-//       const botMessage = { sender: "bot", text: res.data.response || "No response from AI." };
-//       setMessages([...updatedMessages, botMessage]);
-
-//       // ✅ Refresh chat history but keep the session intact
-//       // fetchChatHistory(storedSession);
-//   } catch (error) {
-//       console.error("Error:", error);
-//       setMessages([...updatedMessages, { sender: "bot", text: "⚠️ Error: Unable to get a response from the server." }]);
-//   }
-
-//     setLoading(false);
-//   };
-
-//   // ✅ Function to Logout
-//   const handleLogout = () => {
-//     localStorage.removeItem("authToken");
-//     navigate("/");
-//   };
-
-//   // // ✅ Handle Sending User Message
-//   // const handleSend = async (e) => {
-//   //   e.preventDefault();
-//   //   const trimmed = input.trim();
-//   //   if (!trimmed) return;
-
-//   //   const newUserMessage = { sender: "user", text: trimmed };
-//   //   const updatedMessages = [...messages, newUserMessage];
-//   //   setMessages(updatedMessages);
-//   //   setChatHistory([...chatHistory, { id: chatHistory.length, text: trimmed }]);
-//   //   setInput("");
-//   //   setLoading(true);
-
-//   //   // setMessages((prevMessages) => [...prevMessages, newUserMessage]);
-//   //   // setChatHistory((prevHistory) => [...prevHistory, { id: prevHistory.length, text: trimmed }]);
-//   //   // setInput("");
-//   //   // setLoading(true);
-//   //   // setError("");
-
-//   //   try {
-//   //     const userId = "user-1234"; // Ideally, fetch from authentication
-//   //     const timestamp = new Date().toISOString();
-
-//   //     const res = await axios.post("http://localhost:8000/api/chat/", {
-//   //       query: trimmed,
-//   //       session_id: sessionId,
-//   //       user_id: userId,
-//   //       timestamp: timestamp
-//   //     });
-
-//   //     const botMessage = {
-//   //       sender: "bot",
-//   //       text: res.data.response || "No response from AI",
-//   //     };
-//   //     setMessages((prevMessages) => [...prevMessages, botMessage]);
-//   //   } catch (error) {
-//   //     console.error("Error sending message:", error);
-//   //     const botErrorMsg = {
-//   //       sender: "bot",
-//   //       text: "Error: Unable to get a response from the server.",
-//   //     };
-//   //     setMessages([...updatedMessages, botErrorMsg]);
-//   //   }
-//   //   setLoading(false);
-//   // };
-
-//   // ✅ Scroll to the bottom when a new message is added
-//   useEffect(() => {
-//     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-//   }, [messages]);
-
-//   return (
-//     <div style={{ display: "flex", height: "100vh" }}>
-//       {/* Sidebar for Chat History */}
-//       <div style={{ width: "250px", backgroundColor: "#1c1c24", padding: "15px", color: "white", display: "flex", flexDirection: "column" }}>
-//         <button
-//           style={{
-//             backgroundColor: "#444",
-//             color: "white",
-//             padding: "10px",
-//             border: "none",
-//             width: "100%",
-//             borderRadius: "5px",
-//             marginBottom: "15px",
-//           }}
-//           // onClick={startNewSession}
-
-//         >
-//           + New Chat
-//         </button>
-
-//         <select style={{ padding: "8px", marginBottom: "15px", width: "100%", backgroundColor: "#333", color: "white", border: "none", borderRadius: "5px" }}>
-//           <option value="gpt-4">GPT-4</option>
-//           <option value="gpt-4o-mini">GPT-4o Mini</option>
-//         </select>
-
-//         {/* <div style={{ flex: 1, overflowY: "auto" }}>
-//           {chatHistory.map((chat, index) => (
-//             <div key={chat.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "10px" }}>
-//               <span style={{ cursor: "pointer" }}>💬 {chat.text.substring(0, 20)}...</span> 
-//               <button
-//                 onClick={() => setChatHistory(chatHistory.filter((c) => c.id !== chat.id))}
-//                 style={{
-//                   backgroundColor: "transparent",
-//                   border: "none",
-//                   color: "gray",
-//                   cursor: "pointer",
-//                 }}
-//               >
-//                 🗑
-//               </button>
-//             </div>
-//           ))}
-//         </div> */}
-
-//         <div style={{ flex: 1, overflowY: "auto" }}>
-//         <ul style={{ listStyle: "none", padding: 0 }}>
-//           {chatHistory.map((chat, index) => (
-//             <li
-//               key={index}
-//               style={{
-//                 padding: "10px",
-//                 cursor: "pointer",
-//                 background: selectedChat?.session_id === chat.session_id ? "#ddd" : "#fff",
-//                 borderBottom: "1px solid #ccc",
-//               }}
-//               onClick={() => {
-//                 setMessages(
-//                   chat.messages.map((msg) => ({
-//                     sender: msg.role === "user" ? "user" : "bot", // Properly format sender
-//                     text: msg.message, // Ensure correct text
-//                   }))
-//                 );
-//                 setSelectedChat(chat);
-//               }}
-//             >
-//               Chat {index + 1} - {new Date(chat.messages[0]?.timestamp).toLocaleString()}
-//             </li>
-//             ))}
-//           </ul>
-//         </div>
-
-//         {/* Profile and Sign Out */}
-//         <div style={{ textAlign: "center", marginTop: "20px" }}>
-//           <img src="https://i.pravatar.cc/100" alt="User Avatar" style={{ borderRadius: "50%" }} />
-//           <button onClick={handleLogout}
-//             style={{
-//               marginTop: "10px",
-//               padding: "8px",
-//               backgroundColor: "#444",
-//               color: "white",
-//               border: "none",
-//               borderRadius: "5px",
-//               width: "100%",
-//             }}
-//           >
-//             Sign Out
-//           </button>
-//           <p style={{ fontSize: "12px", marginTop: "10px" }}>Developed by <a href="#" style={{ color: "lightblue" }}>Om V. Patel</a></p>
-//         </div>
-//       </div>
-
-//       {/* Chat Window */}
-//       <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "20px" }}>
-//         <h2 style={{ textAlign: "center" }}>My Chatbot</h2>
-
-//         <div
-//           style={{
-//             border: "1px solid #ccc",
-//             borderRadius: "8px",
-//             height: "400px",
-//             overflowY: "scroll",
-//             padding: "16px",
-//             display: "flex",
-//             flexDirection: "column"
-//           }}
-//         >
-//           {messages.map((msg, index) => (
-//             <div
-//               key={index}
-//               style={{
-//                 textAlign: msg.sender === "bot" ? "left" : "right",
-//                 marginBottom: "10px",
-//               }}
-//             >
-//               <span
-//                 style={{
-//                   display: "inline-block",
-//                   padding: "8px 12px",
-//                   borderRadius: "16px",
-//                   backgroundColor: msg.sender === "bot" ? "#f0f0f0" : "#007bff",
-//                   color: msg.sender === "bot" ? "#000" : "#fff",
-//                   maxWidth: "70%",
-//                   wordWrap: "break-word",
-//                 }}
-//               >
-//                 {msg.text}
-//               </span>
-//             </div>
-//           ))}
-//           {loading && <p style={{ textAlign: "center" }}>Thinking...</p>}
-//           <div ref={chatEndRef} />
-//         </div>
-
-//         <form onSubmit={handleSend} style={{ marginTop: "10px", display: "flex" }}>
-//           <input
-//             style={{ flex: 1, padding: "10px" }}
-//             type="text"
-//             placeholder="Type a message..."
-//             value={input}
-//             onChange={(e) => setInput(e.target.value)}
-//           />
-//           <button
-//             style={{
-//               padding: "10px 20px",
-//               backgroundColor: "red",
-//               color: "white",
-//               border: "none",
-//               borderRadius: "8px",
-//               marginLeft: "8px",
-//             }}
-//             type="submit"
-//           >
-//             🖊 SEND
-//           </button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ChatbotPage;
-
-
-// sp new
-
-
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -351,6 +14,7 @@ const ChatbotPage = () => {
   const [selectedChat, setSelectedChat] = useState(null);
   const navigate = useNavigate();
   const chatEndRef = useRef(null); // Ref for scrolling to the latest message
+  const BASE_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const storedSession = sessionStorage.getItem("chatSessionId");
@@ -362,8 +26,8 @@ const ChatbotPage = () => {
       fetchSidebarChats(storedSession);
     } else {
 
-      axios
-        .post("http://localhost:8000/api/login", { email: "user@example.com", password: "yourpassword" })
+     axios
+         .post(`${BASE_URL}/api/login`, { email: "user@example.com", password: "yourpassword" })
         .then((res) => {
           const newSession = res.data.session_id;
           const newChat = res.data.chat_id;
@@ -380,27 +44,48 @@ const ChatbotPage = () => {
     }
   }, []);
 
-  // ✅ Start new chat
+  // // ✅ Start new chat
+  // const startNewSession = async () => {
+  //   const storedSession = sessionStorage.getItem("chatSessionId");
+  //   try {
+  //     const res = await axios.post(
+  //       `http://localhost:8000/api/chat/new?session_id=${storedSession}`
+  //     );
+  //     const newChatId = res.data.chat_id;
+  //     sessionStorage.setItem("chatId", newChatId);
+  //     setChatId(newChatId);
+  //     setMessages([]);
+  //     fetchSidebarChats(storedSession);
+  //   } catch (err) {
+  //     console.error("Failed to start new chat:", err);
+  //   }
+  // };
+
+
+  // for deployment 
+
   const startNewSession = async () => {
-    const storedSession = sessionStorage.getItem("chatSessionId");
-    try {
-      const res = await axios.post(
-        `http://localhost:8000/api/chat/new?session_id=${storedSession}`
-      );
-      const newChatId = res.data.chat_id;
-      sessionStorage.setItem("chatId", newChatId);
-      setChatId(newChatId);
-      setMessages([]);
-      fetchSidebarChats(storedSession);
-    } catch (err) {
-      console.error("Failed to start new chat:", err);
-    }
-  };
+  const storedSession = sessionStorage.getItem("chatSessionId");
+  try {
+    const res = await axios.post(`${BASE_URL}/api/chat/new`, null, {
+      params: { session_id: storedSession },
+    });
+
+    const newChatId = res.data.chat_id;
+    sessionStorage.setItem("chatId", newChatId);
+    setChatId(newChatId);
+    setMessages([]);
+    fetchSidebarChats(storedSession);
+  } catch (err) {
+    console.error("Failed to start new chat:", err);
+  }
+};
+
 
 
 const fetchChatHistory = async (session, chat) => {
   try {
-    const res = await axios.get(`http://localhost:8000/api/chat/history`, {
+  const res = await axios.get(`${BASE_URL}/api/chat/history`, {
       params: { session_id: session, chat_id: chat },
     });
 
@@ -438,7 +123,7 @@ const fetchChatHistory = async (session, chat) => {
 // ✅ Load all chats for sidebar
 const fetchSidebarChats = async (session) => {
   try {
-    const res = await axios.get("http://localhost:8000/api/chat/all-chats", {
+     const res = await axios.get(`${BASE_URL}/api/chat/all-chats", {
       params: { session_id: session },
     });
 
@@ -484,7 +169,7 @@ const handleSend = async (e) => {
         return;
       }
 
-      const res = await axios.post("http://localhost:8000/api/chat/", {
+      const res = await axios.get(`${BASE_URL}/api/chat/", {
           query: input.trim(),
           session_id: storedSession,
           // session_id: sessionStorage.getItem("chatSessionId"),
