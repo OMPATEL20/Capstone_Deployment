@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Card, Form, Button, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 const BASE_URL = process.env.REACT_APP_API_URL;
+
 const ResetPassword = () => {
   const { token } = useParams();
   const navigate = useNavigate();
@@ -25,12 +27,14 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await fetch(`${BASE_URL}/api/reset-password`), {
+      const response = await fetch(`${BASE_URL}/api/reset-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token, new_password: password }),
       });
+
       const data = await response.json();
+
       if (response.ok) {
         setMessage("Password reset successful! Redirecting...");
         setTimeout(() => navigate("/thank-you"), 3000);
@@ -40,6 +44,7 @@ const ResetPassword = () => {
     } catch (err) {
       setError("Failed to reset password. Try again later.");
     }
+
     setLoading(false);
   };
 
