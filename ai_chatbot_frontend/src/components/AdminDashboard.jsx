@@ -143,15 +143,15 @@ import { motion } from "framer-motion";
 const AdminDashboard = () => {
   const [content, setContent] = useState([]);
   const navigate = useNavigate();
-
+const BASE_URL = process.env.REACT_APP_API_URL;
   useEffect(() => {
-    axios.get("http://localhost:8000/api/admin/get-markdown-content")
+    axios.get(`${BASE_URL}/api/admin/get-markdown-content`)
       .then(res => setContent(res.data))
       .catch(err => console.error("Error fetching content:", err));
   }, []);
 
   const deleteContent = async (id) => {
-    await axios.delete(`http://localhost:8000/api/admin/delete-markdown-content/${id}`);
+    await axios.delete(`${BASE_URL}/api/admin/delete-markdown-content/${id}`);
     setContent(content.filter(c => c._id !== id));
   };
 
