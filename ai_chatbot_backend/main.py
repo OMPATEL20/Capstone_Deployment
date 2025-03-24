@@ -587,7 +587,7 @@ from uuid import uuid4
 
 # Load environment variables
 load_dotenv()
-FRONTEND_URL = os.getenv("FRONTEND_URL", "https://chatbot-frontend-ntjv.onrender.com")
+FRONTEND_URL = os.getenv("FRONTEND_URL")
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
