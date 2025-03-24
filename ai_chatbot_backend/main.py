@@ -633,7 +633,7 @@ class Content(BaseModel):
 app = FastAPI()
 
 # Enable CORS for React Frontend
- app.add_middleware(
+app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=False,
