@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import logo from '../Assets/Urban-Systems-logo.jpg';
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 const styles = {
   page: {
@@ -88,7 +89,8 @@ const LoginForm = () => {
     setErrorMsg('');
 
     try {
-      const response = await fetch('http://localhost:8000/api/login', {
+       const response = await fetch(`${BASE_URL}/api/login`, {
+
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
