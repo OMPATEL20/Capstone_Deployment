@@ -587,6 +587,8 @@ from uuid import uuid4
 
 # Load environment variables
 load_dotenv()
+FRONTEND_URL = os.getenv("FRONTEND_URL", "https://chatbot-frontend-ntjv.onrender.com")
+
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Initialize OpenAI client (NEW API FORMAT)
@@ -992,7 +994,8 @@ async def forgot_password(request: ForgotPasswordRequest, background_tasks: Back
     reset_token = secrets.token_urlsafe(32)
     await users_collection.update_one({"email": request.email}, {"$set": {"reset_token": reset_token, "reset_token_expiry": datetime.utcnow()}})
     
-    reset_link = f"https://chatbot-frontend-ntjv.onrender.com/reset-password/{reset_token}"
+   reset_link = f"{FRONTEND_URL}/reset-password/{reset_token}"
+
     background_tasks.add_task(send_email, request.email, "Password Reset Request", f"Click here to reset your password: {reset_link}")
     
     return {"message": "Password reset link has been sent to your email"}
