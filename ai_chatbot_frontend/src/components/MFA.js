@@ -75,7 +75,7 @@ const MFA = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:8000/api/resend-otp', {
+            const response = await fetch(`${BASE_URL}/api/resend-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: email.trim() }),
