@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 
 const styles = {
   page: {
@@ -71,7 +73,7 @@ const UrbanRegistrationForm = () => {
     }
     
     try {
-      const response = await fetch('http://localhost:8000/api/register', {
+const response = await fetch(`${BASE_URL}/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
