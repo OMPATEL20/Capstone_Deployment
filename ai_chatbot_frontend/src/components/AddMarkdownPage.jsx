@@ -8,8 +8,7 @@ const AddMarkdownPage = () => {
   const [title, setTitle] = useState("");
   const [markdown_content, setMarkdownContent] = useState("");
   const navigate = useNavigate();
-  
-
+  const BASE_URL = process.env.REACT_APP_API_URL;
   const submitContent = async () => {
     await axios.post(`${process.env.REACT_APP_API_URL}/api/admin/add-markdown-content`, {
 
