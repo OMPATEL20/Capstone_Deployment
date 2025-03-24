@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+const BASE_URL = process.env.REACT_APP_API_URL;
 const styles = {
   page: {
     background: "url('https://source.unsplash.com/1600x900/?city,urban') no-repeat center center fixed",
@@ -98,7 +98,7 @@ const UrbanRegistrationForm = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/register', {
+     const response = await fetch(`${BASE_URL}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password, role }),
