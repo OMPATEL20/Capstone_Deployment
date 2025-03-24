@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
  const BASE_URL = process.env.REACT_APP_API_URL;
+console.log("🚀 Loaded BASE_URL from .env:", BASE_URL);
 const ChatbotPage = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
