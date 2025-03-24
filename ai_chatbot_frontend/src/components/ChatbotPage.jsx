@@ -123,7 +123,8 @@ const fetchChatHistory = async (session, chat) => {
 // ✅ Load all chats for sidebar
 const fetchSidebarChats = async (session) => {
   try {
-     const res = await axios.get(`${BASE_URL}/api/chat/all-chats", {
+    const res = await axios.get(`${BASE_URL}/api/chat/all-chats`, {
+
       params: { session_id: session },
     });
 
@@ -169,7 +170,7 @@ const handleSend = async (e) => {
         return;
       }
 
-      const res = await axios.get(`${BASE_URL}/api/chat/", {
+      const res = await axios.post(`${BASE_URL}/api/chat/", {
           query: input.trim(),
           session_id: storedSession,
           // session_id: sessionStorage.getItem("chatSessionId"),
