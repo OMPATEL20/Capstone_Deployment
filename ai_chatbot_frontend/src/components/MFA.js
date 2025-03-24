@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 const MFA = () => {
     const [otp, setOtp] = useState('');
@@ -23,7 +24,7 @@ const MFA = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:8000/api/verify-otp', {
+            const response = await fetch(`${BASE_URL}/api/verify-otp`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, otp }),
