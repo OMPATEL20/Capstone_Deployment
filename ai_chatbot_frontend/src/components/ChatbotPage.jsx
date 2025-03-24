@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-
+ const BASE_URL = process.env.REACT_APP_API_URL;
 const ChatbotPage = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -14,7 +14,7 @@ const ChatbotPage = () => {
   const [selectedChat, setSelectedChat] = useState(null);
   const navigate = useNavigate();
   const chatEndRef = useRef(null); // Ref for scrolling to the latest message
-  const BASE_URL = process.env.REACT_APP_API_URL;
+ 
 
   useEffect(() => {
     const storedSession = sessionStorage.getItem("chatSessionId");
