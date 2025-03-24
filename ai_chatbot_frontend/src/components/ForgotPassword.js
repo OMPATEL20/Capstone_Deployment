@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Card, Form, Button, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ const ForgotPassword = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8000/api/forgot-password", {
+    const response = await fetch(`${BASE_URL}/api/forgot-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
