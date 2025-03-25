@@ -91,9 +91,9 @@ import { Container, Card, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import Lottie from "react-lottie";
-
 import successAnimation from "../Assets/success-animation.json";
 import starsAnimation from "../Assets/stars-animation.json";
+import backgroundVideo from "../Assets/background-video.mp4";
 
 const successOptions = {
   loop: true,
