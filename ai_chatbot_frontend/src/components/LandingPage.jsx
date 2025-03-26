@@ -76,22 +76,20 @@
 // export default LandingPage;
 
 
-
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaRobot, FaBookOpen, FaUserShield } from "react-icons/fa";
 
 const LandingPage = () => {
-  const [role, setRole] = useState("user"); // Default to 'user'
-  const navigate = useNavigate();
+  const [role, setRole] = useState("user");
 
   useEffect(() => {
-    // You can replace this with a real role fetch (API or auth token)
     const storedRole = localStorage.getItem("user_role") || "user";
     setRole(storedRole);
   }, []);
 
-
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-white via-sky-100 to-indigo-200 flex flex-col">
       {/* Main Content */}
       <main className="flex flex-col items-center justify-center flex-grow text-center px-4 py-10">
         <h2 className="text-4xl font-bold text-gray-800 mb-4">Welcome to Urban Systems</h2>
@@ -104,7 +102,7 @@ const LandingPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Chatbot Insights */}
           <Link
-            to="/chat"
+            to="/main"
             className="bg-white hover:bg-blue-50 border border-blue-200 p-6 rounded-2xl shadow-xl transition-all"
           >
             <FaRobot size={40} className="text-blue-500 mb-3 mx-auto" />
@@ -129,7 +127,7 @@ const LandingPage = () => {
           {/* Admin Dashboard (Only for Admins) */}
           {role === "admin" && (
             <Link
-              to="/admin"
+              to="/admin-dashboard"
               className="bg-white hover:bg-green-50 border border-green-200 p-6 rounded-2xl shadow-xl transition-all"
             >
               <FaUserShield size={40} className="text-green-500 mb-3 mx-auto" />
