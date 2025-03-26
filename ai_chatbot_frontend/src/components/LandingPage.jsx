@@ -1,41 +1,45 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-
-const BlogGrid = ({ darkMode }) => {
+const LandingPage = ({ darkMode }) => {
   const navigate = useNavigate();
 
-  const blogs = [
+  const highlights = [
     {
       id: 1,
-      title: "How Urban Systems used one simple tool to transform public engagement",
-      description: "Urban Systems used narrative maps to make public engagement more accessible and effective.",
-      thumbnail: "/thumbnail_image.png"
+      title: "Transforming Public Engagement",
+      description:
+        "Urban Systems used narrative maps to make public engagement more accessible and effective.",
+      thumbnail: "/thumbnail_image.png",
     },
     {
       id: 2,
-      title: "No need to compromise on cost, time or quality: Urban Systems & StoryMaps",
-      description: "They streamlined engagement using StoryMaps without sacrificing cost, time, or quality.",
-      thumbnail: "/thumbnail_image.png"
+      title: "Efficiency Without Compromise",
+      description:
+        "Streamline engagement with StoryMaps—no sacrifice on cost, time, or quality.",
+      thumbnail: "/thumbnail_image.png",
     },
     {
       id: 3,
-      title: "How to drive technological change—with just one simple app",
-      description: "ArcGIS StoryMaps helped internal teams embrace tech change easily and with excitement.",
-      thumbnail: "/thumbnail_image.png"
+      title: "Tech Change Made Simple",
+      description:
+        "ArcGIS StoryMaps helped teams embrace innovation effortlessly.",
+      thumbnail: "/thumbnail_image.png",
     },
     {
       id: 4,
-      title: "Helping Peru and Uganda with COVID-19",
-      description: "The Urban Systems Foundation provided pandemic support to partners in Peru and Uganda.",
-      thumbnail: "/thumbnail_image.png"
+      title: "Global COVID-19 Support",
+      description:
+        "Supporting partners in Peru and Uganda through Urban Systems Foundation.",
+      thumbnail: "/thumbnail_image.png",
     },
     {
       id: 5,
-      title: "N’Quatqua FN Hatches Plan for Food Security",
-      description: "This initiative offered every household fresh fish, boosting community food resilience.",
-      thumbnail: "/thumbnail_image.png"
-    }
+      title: "A Vision for Food Security",
+      description:
+        "N’Quatqua FN delivers fresh fish to every household—strengthening resilience.",
+      thumbnail: "/thumbnail_image.png",
+    },
   ];
 
   const handleClick = (id) => {
@@ -44,23 +48,21 @@ const BlogGrid = ({ darkMode }) => {
 
   const pageStyle = {
     minHeight: "100vh",
-    overflowY: "auto",
     backgroundColor: darkMode ? "#0d1117" : "#f5f7fa",
     display: "flex",
     flexDirection: "column",
-    color: darkMode ? "#e6edf3" : "#000"
+    color: darkMode ? "#e6edf3" : "#000",
   };
 
   const containerStyle = {
-    padding: "40px 80px",
+    padding: "60px 80px",
     fontFamily: "Segoe UI, sans-serif",
-    backgroundColor: darkMode ? "#0d1117" : "#f5f7fa"
   };
 
   const gridStyle = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-    gap: "30px"
+    gap: "30px",
   };
 
   const cardStyle = {
@@ -71,194 +73,73 @@ const BlogGrid = ({ darkMode }) => {
       ? "0 4px 12px rgba(255,255,255,0.05)"
       : "0 4px 12px rgba(0,0,0,0.1)",
     cursor: "pointer",
-    transition: "transform 0.2s ease-in-out"
+    transition: "transform 0.2s ease-in-out",
   };
 
   const imageStyle = {
     width: "100%",
     height: "160px",
-    objectFit: "cover"
+    objectFit: "cover",
   };
 
   const contentStyle = {
-    padding: "16px"
+    padding: "16px",
   };
 
   const titleStyle = {
-    fontSize: "18px",
+    fontSize: "20px",
     fontWeight: "bold",
-    marginBottom: "8px",
-    color: darkMode ? "#fefefe" : "#333"
+    marginBottom: "10px",
+    color: darkMode ? "#fefefe" : "#333",
   };
 
   const descriptionStyle = {
-    fontSize: "14px",
-    color: darkMode ? "#cbd5e1" : "#666"
+    fontSize: "15px",
+    color: darkMode ? "#cbd5e1" : "#666",
   };
 
   return (
     <div style={pageStyle}>
       <div style={containerStyle}>
-        <h2
+        <h1
           style={{
-            fontSize: "28px",
-            marginBottom: "30px",
-            color: darkMode ? "#fefefe" : "#222"
+            fontSize: "36px",
+            marginBottom: "20px",
+            color: darkMode ? "#fefefe" : "#111",
           }}
         >
-          Latest Blogs
-        </h2>
-
-        <div style={gridStyle}>
-          {blogs.map((blog) => (
-            <div
-              key={blog.id}
-              style={cardStyle}
-              onClick={() => handleClick(blog.id)}
-              onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
-              onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-            >
-              {/* Thumbnail (optional) */}
-              {/* <img src={blog.thumbnail} alt={blog.title} style={imageStyle} /> */}
-
-              <div style={contentStyle}>
-                <div style={titleStyle}>{blog.title}</div>
-                <div style={descriptionStyle}>{blog.description}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default import React from "react";
-import { useNavigate } from "react-router-dom";
-
-
-const BlogGrid = ({ darkMode }) => {
-  const navigate = useNavigate();
-
-  const blogs = [
-    {
-      id: 1,
-      title: "How Urban Systems used one simple tool to transform public engagement",
-      description: "Urban Systems used narrative maps to make public engagement more accessible and effective.",
-      thumbnail: "/thumbnail_image.png"
-    },
-    {
-      id: 2,
-      title: "No need to compromise on cost, time or quality: Urban Systems & StoryMaps",
-      description: "They streamlined engagement using StoryMaps without sacrificing cost, time, or quality.",
-      thumbnail: "/thumbnail_image.png"
-    },
-    {
-      id: 3,
-      title: "How to drive technological change—with just one simple app",
-      description: "ArcGIS StoryMaps helped internal teams embrace tech change easily and with excitement.",
-      thumbnail: "/thumbnail_image.png"
-    },
-    {
-      id: 4,
-      title: "Helping Peru and Uganda with COVID-19",
-      description: "The Urban Systems Foundation provided pandemic support to partners in Peru and Uganda.",
-      thumbnail: "/thumbnail_image.png"
-    },
-    {
-      id: 5,
-      title: "N’Quatqua FN Hatches Plan for Food Security",
-      description: "This initiative offered every household fresh fish, boosting community food resilience.",
-      thumbnail: "/thumbnail_image.png"
-    }
-  ];
-
-  const handleClick = (id) => {
-    navigate(`/blog/${id}`);
-  };
-
-  const pageStyle = {
-    minHeight: "100vh",
-    overflowY: "auto",
-    backgroundColor: darkMode ? "#0d1117" : "#f5f7fa",
-    display: "flex",
-    flexDirection: "column",
-    color: darkMode ? "#e6edf3" : "#000"
-  };
-
-  const containerStyle = {
-    padding: "40px 80px",
-    fontFamily: "Segoe UI, sans-serif",
-    backgroundColor: darkMode ? "#0d1117" : "#f5f7fa"
-  };
-
-  const gridStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-    gap: "30px"
-  };
-
-  const cardStyle = {
-    backgroundColor: darkMode ? "#161b22" : "#fff",
-    borderRadius: "12px",
-    overflow: "hidden",
-    boxShadow: darkMode
-      ? "0 4px 12px rgba(255,255,255,0.05)"
-      : "0 4px 12px rgba(0,0,0,0.1)",
-    cursor: "pointer",
-    transition: "transform 0.2s ease-in-out"
-  };
-
-  const imageStyle = {
-    width: "100%",
-    height: "160px",
-    objectFit: "cover"
-  };
-
-  const contentStyle = {
-    padding: "16px"
-  };
-
-  const titleStyle = {
-    fontSize: "18px",
-    fontWeight: "bold",
-    marginBottom: "8px",
-    color: darkMode ? "#fefefe" : "#333"
-  };
-
-  const descriptionStyle = {
-    fontSize: "14px",
-    color: darkMode ? "#cbd5e1" : "#666"
-  };
-
-  return (
-    <div style={pageStyle}>
-      <div style={containerStyle}>
-        <h2
+          Welcome to Urban Systems
+        </h1>
+        <p
           style={{
-            fontSize: "28px",
-            marginBottom: "30px",
-            color: darkMode ? "#fefefe" : "#222"
+            fontSize: "18px",
+            marginBottom: "40px",
+            maxWidth: "720px",
+            color: darkMode ? "#94a3b8" : "#444",
           }}
         >
-          Latest Blogs
-        </h2>
+          Discover how Urban Systems leverages cutting-edge technology and
+          storytelling tools to empower communities, support change, and create
+          meaningful impact across the globe.
+        </p>
 
         <div style={gridStyle}>
-          {blogs.map((blog) => (
+          {highlights.map((item) => (
             <div
-              key={blog.id}
+              key={item.id}
               style={cardStyle}
-              onClick={() => handleClick(blog.id)}
-              onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
-              onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+              onClick={() => handleClick(item.id)}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.transform = "scale(1.02)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.transform = "scale(1)")
+              }
             >
-              {/* Thumbnail (optional) */}
-              {/* <img src={blog.thumbnail} alt={blog.title} style={imageStyle} /> */}
-
+              <img src={item.thumbnail} alt={item.title} style={imageStyle} />
               <div style={contentStyle}>
-                <div style={titleStyle}>{blog.title}</div>
-                <div style={descriptionStyle}>{blog.description}</div>
+                <div style={titleStyle}>{item.title}</div>
+                <div style={descriptionStyle}>{item.description}</div>
               </div>
             </div>
           ))}
