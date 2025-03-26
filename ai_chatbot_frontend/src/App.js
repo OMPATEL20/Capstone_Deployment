@@ -16,6 +16,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import EventForm from "./components/EventForm";
 import MarkdownContentPage from "./components/MarkdownContentPage";
+import landing_page from "./components/landing_page";
 
 function App() {
   const location = useLocation();
