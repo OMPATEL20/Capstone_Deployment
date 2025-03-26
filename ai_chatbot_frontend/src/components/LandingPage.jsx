@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Player } from "@lottiefiles/react-lottie-player"; // Optional alternative to lottie-react
-import chatbotAnimation from "../Assets/chatbot.json"; // Use your path
+import chatbotAnimation from "../assets/chatbot.json"; // Use your path
 
 const LandingPage = () => {
   const userRole = localStorage.getItem("user_role");
