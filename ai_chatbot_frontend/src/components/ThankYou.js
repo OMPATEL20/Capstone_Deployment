@@ -90,14 +90,16 @@
 
 // export default ThankYou;
 
-
 import React from "react";
 import { Container, Card, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import Lottie from "react-lottie";
+
+// Lottie Animations
 import successAnimation from "../Assets/success-animation.json";
 import starsAnimation from "../Assets/stars-animation.json";
+import backgroundAnimation from "../Assets/background-video.json";
 
 const successOptions = {
   loop: true,
@@ -117,26 +119,31 @@ const starsOptions = {
   },
 };
 
+const backgroundOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: backgroundAnimation,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
 const ThankYou = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ position: "relative", width: "100vw", height: "100vh" }}>
-      {/* Background Video from public/ folder */}
-      <video
-        autoPlay
-        loop
-        muted
+    <div style={{ position: "relative", width: "100vw", height: "100vh", overflow: "hidden" }}>
+      {/* Background Lottie Animation */}
+      <div
         style={{
           position: "absolute",
           width: "100%",
           height: "100%",
-          objectFit: "cover",
-          zIndex: "-2",
+          zIndex: "-3",
         }}
       >
-        <source src="/background-video.mp4" type="video/mp4" />
-      </video>
+        <Lottie options={backgroundOptions} height="100%" width="100%" />
+      </div>
 
       {/* Twinkling Stars Animation */}
       <div
@@ -146,7 +153,7 @@ const ThankYou = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          zIndex: "-1",
+          zIndex: "-2",
           pointerEvents: "none",
         }}
       >
@@ -162,6 +169,7 @@ const ThankYou = () => {
             boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
             backgroundColor: "rgba(255, 255, 255, 0.9)",
             borderRadius: "20px",
+            zIndex: "1",
           }}
         >
           <Card.Body>
@@ -181,4 +189,3 @@ const ThankYou = () => {
 };
 
 export default ThankYou;
-
