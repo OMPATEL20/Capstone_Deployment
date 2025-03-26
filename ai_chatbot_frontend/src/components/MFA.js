@@ -51,7 +51,8 @@ const MFA = () => {
           theme: 'colored',
         });
 
-        setTimeout(() => navigate('/main'), 2200);
+        // setTimeout(() => navigate('/main'), 2200);
+        setTimeout(() => navigate('/landing_page'), 2200);
       }
     } catch (err) {
       setError('Something went wrong. Please try again later.');
