@@ -68,6 +68,7 @@ function App() {
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
+           <Route path="/landing_page" element={<landing_page />} />
           <Route path="/main" element={<ChatbotPage />} />
           <Route path="/blogs" element={<BlogPost />} />
           <Route path="/add-post" element={<AddPost />} />
