@@ -52,7 +52,7 @@ const MFA = () => {
         });
 
         // setTimeout(() => navigate('/main'), 2200);
-        setTimeout(() => navigate('/landing_page'), 2200);
+        setTimeout(() => navigate('/LandingPage'), 2200);
       }
     } catch (err) {
       setError('Something went wrong. Please try again later.');
