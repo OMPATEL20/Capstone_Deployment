@@ -91,28 +91,6 @@ const LandingPage = () => {
     setRole(storedRole);
   }, []);
 
-  return (
-    <div className="min-h-screen bg-gradient-to-r from-indigo-200 via-sky-100 to-pink-100 flex flex-col">
-      {/* Navbar */}
-      <nav className="bg-black text-white py-4 px-8 flex justify-between items-center shadow-lg">
-        <h1 className="text-2xl font-bold">URBAN SYSTEMS</h1>
-        <div className="flex gap-6 items-center">
-          <Link to="/chat" className="hover:text-yellow-400 transition">CHATBOT</Link>
-          <Link to="/blogs" className="hover:text-yellow-400 transition">BLOGS</Link>
-          {role === "admin" && (
-            <Link to="/admin" className="hover:text-yellow-400 transition">ADMIN DASHBOARD</Link>
-          )}
-          <button
-            onClick={() => {
-              localStorage.clear();
-              navigate("/login");
-            }}
-            className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-lg"
-          >
-            Logout
-          </button>
-        </div>
-      </nav>
 
       {/* Main Content */}
       <main className="flex flex-col items-center justify-center flex-grow text-center px-4 py-10">
