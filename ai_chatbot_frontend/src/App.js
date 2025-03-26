@@ -17,7 +17,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import EventForm from "./components/EventForm";
 import MarkdownContentPage from "./components/MarkdownContentPage";
-import landing_page from "./components/landing_page";
+import landing_page from "./components/LandingPage";
 
 function App() {
   const location = useLocation();
@@ -70,7 +70,7 @@ function App() {
 
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
-           <Route path="/landing_page" element={<landing_page />} />
+           <Route path="/LandingPage" element={<LandingPage />} />
           <Route path="/main" element={<ChatbotPage />} />
           <Route path="/blogs" element={<BlogPost />} />
           <Route path="/add-post" element={<AddPost />} />
