@@ -1,76 +1,73 @@
-// src/pages/LandingPage.jsx
 import React from "react";
 import { Link } from "react-router-dom";
+import { Player } from "@lottiefiles/react-lottie-player"; // Optional alternative to lottie-react
+import chatbotAnimation from "../assets/chatbot.json"; // Use your path
 
 const LandingPage = () => {
-  const userRole = localStorage.getItem("user_role"); // 'admin' or 'user'
+  const userRole = localStorage.getItem("user_role");
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800 px-6 py-12">
-      {/* Hero Section */}
-      <section className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4 text-blue-800">
-          Empowering Internal Communication with AI
-        </h1>
-        <p className="max-w-2xl mx-auto mb-6 text-lg">
-          Welcome to the Urban Systems AI Chatbot. Built with LLM technology, this system streamlines internal knowledge-sharing and enables efficient information retrieval across departments.
-        </p>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-pink-100 py-12 px-4 text-center">
+      {/* Animated Bot */}
+      <div className="w-full flex justify-center mb-4">
+        <Player
+          autoplay
+          loop
+          src={chatbotAnimation}
+          style={{ height: "220px", width: "220px" }}
+        />
+      </div>
+
+      {/* Title + Description */}
+      <h1 className="text-4xl font-extrabold text-indigo-700 mb-4">
+        Welcome to Urban Systems
+      </h1>
+      <p className="max-w-2xl mx-auto text-gray-700 text-lg mb-6">
+        Revolutionizing internal knowledge sharing with an AI-powered LLM Chatbot.
+        Get insights, solve problems, and stay connected — instantly.
+      </p>
+
+      {/* Chatbot CTA */}
+      <Link
+        to="/main"
+        className="inline-block mb-12 px-6 py-3 bg-indigo-600 text-white rounded-full text-lg font-semibold shadow hover:bg-indigo-700 transition"
+      >
+        🤖 Launch Chatbot
+      </Link>
+
+      {/* Blogs */}
+      <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left">
         <Link
           to="/main"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold transition"
+          className="bg-yellow-200 p-6 rounded-xl shadow-md hover:shadow-xl transition"
         >
-          Go to Chatbot
+          <h3 className="text-2xl font-bold text-yellow-800 mb-2">Chatbot Insights</h3>
+          <p className="text-yellow-900">
+            Learn how our LLM chatbot transformed communication. Click to chat!
+          </p>
         </Link>
-      </section>
 
-      {/* Blogs Section */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">📚 Featured Blogs</h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          {[1, 2, 3].map((i) => (
-            <div
-              key={i}
-              className="bg-white p-5 rounded-lg shadow hover:shadow-lg transition"
-            >
-              <h3 className="font-bold text-lg mb-2">Blog Title {i}</h3>
-              <p className="text-gray-600 text-sm">
-                Short description about blog content {i}. Useful insights and updates inside.
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+        <Link
+          to="/blogs"
+          className="bg-green-200 p-6 rounded-xl shadow-md hover:shadow-xl transition"
+        >
+          <h3 className="text-2xl font-bold text-green-800 mb-2">Company Blogs</h3>
+          <p className="text-green-900">
+            Explore internal blogs, stories, and knowledge updates.
+          </p>
+        </Link>
+      </div>
 
-      {/* Admin Only Section */}
+      {/* Admin Only */}
       {userRole === "admin" && (
-        <section>
-          <h2 className="text-2xl font-bold mb-6 text-red-700">🛠️ Admin Tools</h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            <Link
-              to="/admin-dashboard"
-              className="bg-white border-l-4 border-blue-500 p-4 shadow hover:shadow-lg rounded"
-            >
-              <h4 className="font-semibold mb-2">Admin Dashboard</h4>
-              <p className="text-sm text-gray-700">Monitor chatbot usage and manage users.</p>
-            </Link>
-
-            <Link
-              to="/add-markdown-page"
-              className="bg-white border-l-4 border-green-500 p-4 shadow hover:shadow-lg rounded"
-            >
-              <h4 className="font-semibold mb-2">Add Markdown Page</h4>
-              <p className="text-sm text-gray-700">Create or edit informational pages with markdown.</p>
-            </Link>
-
-            <Link
-              to="/EventForm"
-              className="bg-white border-l-4 border-purple-500 p-4 shadow hover:shadow-lg rounded"
-            >
-              <h4 className="font-semibold mb-2">Event Form</h4>
-              <p className="text-sm text-gray-700">Post updates and announcements internally.</p>
-            </Link>
-          </div>
-        </section>
+        <div className="mt-16">
+          <Link
+            to="/admin-dashboard"
+            className="inline-block bg-red-600 text-white px-6 py-3 rounded-full font-bold shadow hover:bg-red-700 transition"
+          >
+            🔧 Admin Dashboard
+          </Link>
+        </div>
       )}
     </div>
   );
